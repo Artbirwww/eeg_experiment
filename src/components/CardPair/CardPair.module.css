@@ -1,0 +1,26 @@
+.container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    flex-direction: column;
+}
+
+.cardscontainer {
+    display: flex;
+    gap: 20px;
+}
+
+.cardButton {
+    width: 70vh;
+    height: 70vh;
+    font-size: 2rem;
+    font-weight: bold;
+    border: 3px solid #4a90e2;
+    background: white;
+    color: #4a90e2;
+    border-radius: 16px;
+    cursor: pointer;
+    font-family: 'Arial', sans-serif;
+}
