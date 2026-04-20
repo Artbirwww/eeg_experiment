@@ -1,0 +1,27 @@
+.experimenterPanel {
+  background: #1a1a2e;
+  padding: 30px;
+  border-radius: 10px;
+  margin-top: 50px;
+}
+
+.experimenterPanel h2 {
+  margin-bottom: 20px;
+  color: #ffd700;
+}
+
+.experimenterPanel button {
+  background: #ffd700;
+  color: #000;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px;
+  font-weight: bold;
+}
+
+.experimenterPanel button:hover {
+  background: #ffed4a;
+}

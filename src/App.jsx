@@ -1,104 +1,139 @@
 import React from 'react';
-import { TimerProvider } from '../contexts/TimerContext';
-import Button from './components/Button/Button';
-import Command from './components/Command/Сommand';
-import BtnSec from './components/Button/BtnSec/BtnSec';
-import Practice from "./Tests/Practice/Practice";
-import Test2 from "./Tests/Test2/Test2";
-import Test3 from "./Tests/Test3/Test3";
-import Plus from './components/Screens/Plus'
+import { ExperimentProvider, useExperiment } from './contexts/ExperimentContext';
+import { PAIR_SEQUENCE } from './constants/pairSequence';
+import ExperimenterPanel from './components/ExperimenterPanel/ExperimenterPanel';
+import Instruction from './components/Instruction/Instruction';
+import TrainingMode from './components/TrainingMode/TrainingMode';
+import CalibrationSequence from './components/CalibrationSequence/CalibrationSequence';
+import ExperimentBlock from './components/ExperimentBlock/ExperimentBlock';
+import CompleteScreen from './components/CompleteScreen/CompleteScreen';
+import './App.css';
 
+const AppContent = () => {
+  const {
+    sessionState,
+    currentBlock,
+    experimentResults,
+    showExperimenterPanel,
+    sendEEGEvent,
+    manualNext,
+    startTraining,
+    completeTraining,
+    startExperimentPart1,
+    completeExperimentPart1,
+    startExperimentPart2,
+    completeExperimentPart2,
+    completeSession,
+    addExperimentResult,
+    setCurrentBlock
+  } = useExperiment();
+
+  const handleBlockComplete = (blockData) => {
+    addExperimentResult(blockData);
+
+    if (sessionState === 'experiment1' && currentBlock === 6) {
+      completeExperimentPart1();
+    } else if (sessionState === 'experiment1') {
+      setCurrentBlock(prev => prev + 1);
+    } else if (sessionState === 'experiment2' && currentBlock === 12) {
+      completeExperimentPart2();
+    } else if (sessionState === 'experiment2') {
+      setCurrentBlock(prev => prev + 1);
+    }
+  };
+
+  // Начальный экран
+  if (sessionState === 'setup') {
+    return (
+      <div className="app">
+        <h1>ЭЭГ Эксперимент</h1>
+        {showExperimenterPanel && <ExperimenterPanel onManualNext={manualNext} />}
+      </div>
+    );
+  }
+
+  // Инструкция
+  if (sessionState === 'instruction') {
+    return <Instruction onStartTraining={startTraining} />;
+  }
+
+  // Тренировка
+  if (sessionState === 'training') {
+    return <TrainingMode onComplete={completeTraining} onEEGEvent={sendEEGEvent} />;
+  }
+
+  // Калибровка 1
+  if (sessionState === 'calibration1') {
+    return (
+      <CalibrationSequence 
+        onComplete={startExperimentPart1} 
+        onEEGEvent={sendEEGEvent}
+        showExperimenterPanel={showExperimenterPanel}
+      />
+    );
+  }
+
+  // Эксперимент часть 1
+  if (sessionState === 'experiment1') {
+    const blockPairs = PAIR_SEQUENCE[`block${currentBlock}`];
+    return (
+      <ExperimentBlock
+        blockNumber={currentBlock}
+        pairs={blockPairs}
+        onBlockComplete={handleBlockComplete}
+        onEEGEvent={sendEEGEvent}
+      />
+    );
+  }
+
+  // Калибровка 2
+  if (sessionState === 'calibration2') {
+    return (
+      <CalibrationSequence 
+        onComplete={startExperimentPart2} 
+        onEEGEvent={sendEEGEvent}
+        showExperimenterPanel={showExperimenterPanel}
+      />
+    );
+  }
+
+  // Эксперимент часть 2
+  if (sessionState === 'experiment2') {
+    const blockPairs = PAIR_SEQUENCE[`block${currentBlock}`];
+    return (
+      <ExperimentBlock
+        blockNumber={currentBlock}
+        pairs={blockPairs}
+        onBlockComplete={handleBlockComplete}
+        onEEGEvent={sendEEGEvent}
+      />
+    );
+  }
+
+  // Калибровка 3
+  if (sessionState === 'calibration3') {
+    return (
+      <CalibrationSequence 
+        onComplete={completeSession} 
+        onEEGEvent={sendEEGEvent}
+        showExperimenterPanel={showExperimenterPanel}
+      />
+    );
+  }
+
+  // Завершение
+  if (sessionState === 'complete') {
+    return <CompleteScreen results={experimentResults} />;
+  }
+
+  return null;
+};
 
 function App() {
-  const sequence = [
-    {
-      id: 'calibration_closed',
-      duration: 5000
-    },
-    {
-      id: 'calibration_open',
-      duration: 5000
-    },
-    {
-      id: 'plus',
-      duration: 5000
-    },
-    {
-      id: 'practice_cmd',
-      duration: 5000
-    },
-    {
-      id: 'practice',
-      duration: null
-    },
-    {
-      id: 'test2_cmd',
-      duration: 5000
-    },
-    {
-      id: 'test2',
-      duration: null,
-    },
-    {
-      id: 'calibration_closed_2',
-      duration: 5000
-    },
-    {
-      id: 'calibration_open_2',
-      duration: 5000
-    },
-    {
-      id: 'plus_2',
-      duration: 5000
-    },
-    {
-      id: 'test3_cmd',
-      duration: 5000
-    },
-    {
-      id: 'test3',
-      duration: null,
-    },
-    {
-      id: 'calibration_closed_3',
-      duration: 5000
-    },
-    {
-      id: 'calibration_open_3',
-      duration: 5000
-    },
-    {
-      id: 'plus_3',
-      duration: 5000
-    },
-  ];
-
   return (
-    <TimerProvider sequence={sequence}>
-
-      <Button />
-      <BtnSec />
-      
-      <Command id="calibration_closed" Text={"Закройте глаза, идёт калибровка с закрытыми глазами. Мы скажем, когда можно открыть глаза."} />
-      <Command id="calibration_closed" Text={"Закройте глаза, идёт калибровка с закрытыми глазами. Мы скажем, когда можно открыть глаза."} />
-      <Command id="calibration_open" Text={"Откройте глаза, идёт калибровка с открытыми глазами. Смотрите на экран."} />
-      <Plus id="plus"></Plus>
-      <Command id="practice_cmd" Text={"Выберите то, что вам больше нравится. Выбор осуществляется клавишами F и J. На выбор даётся 10 секунд."} />      
-      <Practice />
-      <Command id="test2_cmd" Text={"Теперь начинаем эксперимент. Выберите ту деятельность, которая вам больше нравится. Выбор осуществляется клавишами F и J. На выбор даётся 10 секунд. Поехали"} />
-      <Test2 />
-      <Command id="calibration_closed_2" Text={"Закройте глаза, идёт калибровка с закрытыми глазами. Мы скажем, когда можно открыть глаза."} />
-      <Command id="calibration_open_2" Text={"Откройте глаза, идёт калибровка с открытыми глазами. Смотрите на экран."} />
-      <Plus id="plus_2"></Plus>
-
-      <Command id="test3_cmd" Text={"Продолжаем эксперимент. Выберите ту деятельность, которая вам больше нравится. Выбор осуществляется клавишами F и J. На выбор даётся 10 секунд. Поехали"} />
-      <Test3 />
-      <Command id="calibration_closed_3" Text={"Закройте глаза, идёт калибровка с закрытыми глазами. Мы скажем, когда можно открыть глаза."} />
-      <Command id="calibration_open_3" Text={"Откройте глаза, идёт калибровка с открытыми глазами. Смотрите на экран."} />
-      <Plus id="plus_3"></Plus>
-
-
-    </TimerProvider>
+    <ExperimentProvider>
+      <AppContent />
+    </ExperimentProvider>
   );
 }
 

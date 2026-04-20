@@ -1,0 +1,61 @@
+.instruction {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #000;
+  color: #fff;
+}
+
+.content {
+  background: #1a1a2e;
+  padding: 30px;
+  border-radius: 10px;
+  margin: 20px;
+}
+
+.content p {
+  margin: 10px 0;
+  font-size: 18px;
+}
+
+.keyVisual {
+  display: flex;
+  gap: 50px;
+  margin: 30px;
+}
+
+.keyLeft, .keyRight {
+  background: #333;
+  padding: 20px 40px;
+  border-radius: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  border: 2px solid #fff;
+}
+
+.startBtn {
+  background: #ffd700;
+  color: #000;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px;
+  font-weight: bold;
+}
+
+.startBtn:hover {
+  background: #ffed4a;
+}
+
+kbd {
+  background: #333;
+  border-radius: 3px;
+  padding: 2px 6px;
+  font-family: monospace;
+  font-weight: bold;
+  margin: 0 2px;
+}
