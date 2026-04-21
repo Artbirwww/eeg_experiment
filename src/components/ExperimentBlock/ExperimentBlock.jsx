@@ -20,7 +20,7 @@ const ExperimentBlock = ({ blockNumber, pairs, onBlockComplete, onEEGEvent }) =>
   return (
     <div className={styles.experimentBlock}>
       <div className={styles.blockHeader}>
-        Блок {blockNumber} - Триал {currentPairIndex + 1} из {pairs.length}
+        Блок {blockNumber} - {currentPairIndex + 1} из {pairs.length}
       </div>
       <TrialStage 
         key={`${blockNumber}-${currentPairIndex}`}

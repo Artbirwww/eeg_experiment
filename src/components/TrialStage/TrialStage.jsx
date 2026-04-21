@@ -39,7 +39,7 @@ const TrialStage = ({ pair, onComplete, onEEGEvent }) => {
     const choiceTimestamp = Date.now();
     const stageStart = startTime;
     const t = choiceTimestamp - (stageStart + 500 + 5000);
-    
+
     setChoiceTime(t);
     setIsWaitingForChoice(false);
     setShowPrompt(false);
@@ -95,7 +95,10 @@ const TrialStage = ({ pair, onComplete, onEEGEvent }) => {
             <div className={styles.imageRight}>{pair.split('-')[1]}</div>
           </div>
           <div className={styles.promptText}>F или J?</div>
-          <div className={styles.keyHint}>← F &nbsp;&nbsp;&nbsp;&nbsp; J →</div>
+          <div className={styles.keyVisual}>
+            <div className={styles.keyLeft}>F ←</div>
+            <div className={styles.keyRight}>→ J</div>
+          </div>
         </div>
       )}
       {stage === 4 && (

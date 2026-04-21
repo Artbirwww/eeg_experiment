@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Calibration from '../Calibration/Calibration';
-// import styles from './CalibrationSequence.module.css';
+import styles from './CalibrationSequence.module.css';
 
 const CalibrationSequence = ({ onComplete, onEEGEvent, showExperimenterPanel }) => {
   const [step, setStep] = useState('open');
