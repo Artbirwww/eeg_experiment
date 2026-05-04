@@ -1,4 +1,3 @@
-// src/components/ImageCard/ImageCard.tsx
 import React, { useState } from 'react';
 import styles from './ImageCard.module.css';
 
@@ -12,7 +11,9 @@ interface ImageCardProps {
 
 const ImageCard: React.FC<ImageCardProps> = ({ imageId, category, side, isActive, onClick }) => {
   const [imageError, setImageError] = useState(false);
-  const imagePath = `/EEG_choice/${category}_${imageId.padStart(2, '0')}.png`;
+  // Используем import.meta.env.BASE_URL для корректного пути на GitHub Pages
+  const baseUrl = import.meta.env.BASE_URL;
+  const imagePath = `${baseUrl}EEG_choice/${category}_${imageId.padStart(2, '0')}.png`;
 
   console.log('Loading image:', imagePath);
 
