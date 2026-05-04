@@ -1,0 +1,26 @@
+/* components/DevButton/DevButton.module.css */
+.devButton {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #ff4444;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 9999;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  transition: all 0.2s;
+}
+
+.devButton:hover {
+  background: #cc0000;
+  transform: scale(1.02);
+}
+
+.devButton:active {
+  transform: scale(0.98);
+}

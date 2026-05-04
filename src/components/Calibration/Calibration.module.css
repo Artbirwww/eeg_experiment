@@ -1,0 +1,15 @@
+/* components/Calibration/Calibration.module.css */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+}
+
+.timer {
+  font-size: 48px;
+  font-weight: bold;
+  margin: 20px;
+}
