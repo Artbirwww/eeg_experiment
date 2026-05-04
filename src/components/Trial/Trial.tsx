@@ -1,4 +1,4 @@
-// components/Trial/Trial.tsx
+// src/components/Trial/Trial.tsx
 import React, { useState, useEffect, useRef } from 'react';
 import ImageCard from '../ImageCard/ImageCard';
 import { csvLogger } from '../../utils/csvLogger';
@@ -22,8 +22,6 @@ const Trial: React.FC<Props> = ({
   rightImage, 
   leftCategory, 
   rightCategory, 
-  blockNumber, 
-  trialNumber, 
   isTraining, 
   onComplete 
 }) => {

@@ -1,4 +1,4 @@
-// components/Experiment/Experiment.tsx
+// src/components/Experiment/Experiment.tsx
 import React, { useState, useCallback, useEffect } from 'react';
 import Trial from '../Trial/Trial';
 import Button from '../Button/Button';
@@ -10,14 +10,6 @@ interface Props {
   blockEnd: number;
   onComplete: () => void;
 }
-
-const categoryMap: Record<string, string> = {
-  'A': 'Driver',
-  'B': 'Engineer',
-  'C': 'Explosion',
-  'D': 'Master',
-  'E': 'Rescuer'
-};
 
 const pairsData: Record<number, Array<{ left: string; right: string; leftCategory: string; rightCategory: string }>> = {
   1: [

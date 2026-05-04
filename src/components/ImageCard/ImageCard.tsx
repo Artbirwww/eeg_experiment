@@ -1,5 +1,5 @@
-// components/ImageCard/ImageCard.tsx
-import React, { useState, useEffect } from 'react';
+// src/components/ImageCard/ImageCard.tsx
+import React, { useState } from 'react';
 import styles from './ImageCard.module.css';
 
 interface ImageCardProps {

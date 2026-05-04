@@ -1,4 +1,4 @@
-// App.tsx (обновленный - конец сессии)
+// src/App.tsx
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './App.module.css';
 import Instruction from './components/Instruction/Instruction';
@@ -8,7 +8,6 @@ import Experiment from './components/Experiment/Experiment';
 import Completion from './components/Completion/Completion';
 import Button from './components/Button/Button';
 import DevButton from './components/DevButton/DevButton';
-import { csvLogger } from './utils/csvLogger';
 
 export type SessionPhase = 'prep' | 'instruction' | 'training' | 'calibration1' | 'experiment1' | 'calibration2' | 'experiment2' | 'calibration3' | 'completion';
 
